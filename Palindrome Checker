@@ -1,0 +1,19 @@
+function palindrome(str) {
+
+  let str2=str.match(/[A-Za-z0-9]+/g);
+  str2= str2.join('');
+  let l = str2.length/2;
+
+
+for( let i = 0;i<l;i++)
+  {
+    if(str2[i].toLowerCase()!==str2[str2.length-1-i].toLowerCase())
+    {
+      return false;
+      
+    }
+  }
+  return true;
+}
+
+palindrome("ey eee");
