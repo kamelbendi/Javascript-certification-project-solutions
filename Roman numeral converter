@@ -1,0 +1,62 @@
+function convertToRoman(num) {
+  let str = "";
+  let number =     [1000,500,100, 50, 10,  5,  1];
+  let charachter = ["M" ,"D","C","L","X","V","I"];
+  //let b = 0;
+
+
+for (let i = 0; i<number.length;i++)
+{
+
+  let a = num/number[i];
+
+
+  if((a-Math.floor(a)).toFixed(4)>=(number[i]-number[i+2])/number[i] && i%2==0)//fix 9
+  {
+    if(a>=1)
+    {
+        for (let j =0; j<Math.floor(a) ;j++)
+        {
+        str+=charachter[i];
+        }
+    num -= (Math.floor(a)*number[i]);
+    
+    }
+  
+  str+= charachter[i+2]+charachter[i];
+  num -= (Math.floor(num/number[i+2])*number[i+2]);
+    continue;
+  }
+  else if(a-Math.floor(a)>=(number[i]-number[i+1])/number[i] && i%2==1)//fix 4
+  {
+      if(a>=1)
+      {
+        for (let j =0; j<Math.floor(a) ;j++)
+        {
+        str+=charachter[i];
+        }
+      num -= (Math.floor(a)*number[i]);
+      }
+  str+= charachter[i+1]+charachter[i];
+  num -= (Math.floor(num/number[i+1])*number[i+1]);
+  continue;
+  }
+  else if(a>=1)
+  {
+    for (let j =0; j<Math.floor(a) ;j++)
+    {
+      str+=charachter[i];
+    }
+    num -= (Math.floor(a)*number[i]);
+    
+
+  }
+    
+  
+  
+}
+
+ return str;
+}
+
+convertToRoman(36);
