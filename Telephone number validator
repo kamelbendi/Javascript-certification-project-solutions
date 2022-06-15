@@ -1,0 +1,23 @@
+function telephoneCheck(str) {
+
+
+let regex1 = /^\d{10}$/.test(str);
+let regex2 = /^\d{3}-\d{3}-\d{4}/.test(str);
+let regex3 = /^\d{3} \d{3} \d{4}/mg.test(str);
+let regex4 = /^[1] \d{3} \d{3} \d{4}/mg.test(str);
+let regex7 = /^[1] \d{3}-\d{3}-\d{4}/mg.test(str);
+let regex5 = /^\(\d{3}\) \d{3}-\d{4}/mg.test(str);
+let regex6 = /^\(\d{3}\)\d{3}-\d{4}/mg.test(str);
+let regex8 = /^1 \(\d{3}\)\s\d{3}-\d{4}$/mg.test(str);
+let regex9 = /^1\(\d{3}\)\d{3}-\d{4}$/mg.test(str);
+if(regex1||regex2||regex3||regex4||regex5||regex6||regex7||regex8||regex9){
+
+  return true;
+}
+else
+{
+  return false
+}
+}
+
+telephoneCheck("555-555-5555");
