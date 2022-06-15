@@ -1,0 +1,106 @@
+function checkCashRegister(price, cash, cid) {
+  var rest = {status :"",change:[]}; //output
+  let money = [0.01,0.05,0.1,0.25,1,5,10,20,100];
+  let tochange = cash - price;
+  
+  
+  Object.prototype.clone = function() {
+    var newObj = (this instanceof Array) ? [] : {};
+    for (let i in this) {
+        if (i == 'clone') 
+            continue;
+        if (this[i] && typeof this[i] == "object") {
+            newObj[i] = this[i].clone();
+        } 
+        else 
+            newObj[i] = this[i]
+    } return newObj;
+};
+
+
+  const f = cid.clone();
+  
+    if (cash<price){
+      rest.status = "INSUFFICIENT_FUNDS";
+      //rest.change = [];
+    }
+    else
+    {
+    for (let i =0; i <9;i++)
+    {
+        //tochange= (tochange).toFixed(4);
+        console.log(tochange)
+      
+        if(tochange>=money[money.length-1-i])
+        { // enough money
+        
+          if(cid[8-i][1]>=tochange)
+          {
+          //let a = tochange;
+          
+          let b = (Math.floor(tochange/money[money.length-i-1]) *money[money.length-i-1]);
+          
+          cid[8-i][1] -= b;
+          
+          console.log(cid)
+          //f[8-i][1] += b;
+          console.log("HELOO. "+b);
+          console.log(cid[8-i][1]);
+          
+          tochange = (tochange - b).toFixed(4);
+          console.log("hey");
+          rest.change.push([cid[8-i][0],b]);
+          console.log("this is the change :"+tochange);
+          console.log("this is b :" +b);
+          continue;
+          }
+          
+          else // not enough money
+          {
+          tochange-=cid[8-i][1];
+          tochange=tochange.toFixed(4);
+          rest.change.push([cid[8-i][0],cid[8-i][1]]);
+          cid[8-i][1]=0;
+          continue;
+          }
+        
+        }
+    }
+    
+    if(tochange==0)
+    {
+      rest.status= "OPEN";
+      
+    }
+    else
+    {
+    console.log(tochange);
+      rest.status= "INSUFFICIENT_FUNDS";
+      rest.change=[];
+      console.log(rest);
+      return rest;
+    }
+    let open = 0;
+    for ( let i =0; i<9;i++)
+    {
+        if (cid[i][1]==0)
+        {
+          open++;
+        }
+    }
+    if (open==9)
+    {
+      rest.status = "CLOSED";
+      rest.change = f;
+      
+    }
+  }
+  
+    console.log(rest);
+  return rest;
+}
+
+
+
+
+checkCashRegister(19.5, 20, [["PENNY", 0.5], ["NICKEL", 0], ["DIME", 0], ["QUARTER", 0], ["ONE", 0], ["FIVE", 0], ["TEN", 0], ["TWENTY", 0], ["ONE HUNDRED", 0]])
